@@ -1,9 +1,14 @@
 import React from "react";
+import styled from "@emotion/styled";
 
-const Results = ({ state, children }) => {
+const Header = styled.h2`
+  color: white;
+`;
+
+const Results = ({ children }) => {
   return (
     <>
-      <h4>Results</h4>
+      <Header>Results</Header>
       {children}
     </>
   );

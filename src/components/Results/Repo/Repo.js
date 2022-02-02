@@ -4,10 +4,10 @@ import styled from "@emotion/styled";
 const Card = styled.li`
   display: flex;
   flex-direction: column;
-  width: clamp(20rem, calc(20rem + 2vw), 22rem);
+  width: clamp(20rem, 21rem, 22rem);
   overflow: hidden;
   box-shadow: 0 0.1rem 1rem rgba(0, 0, 0, 0.1);
-  border-radius: 1em;
+  border-radius: 1rem;
   background: #ece9e6;
   background: linear-gradient(to right, #ffffff, #ece9e6);
 `;
@@ -36,8 +36,9 @@ const Repo = ({
         <a href={url} target="_blank" rel="noreferrer">
           <h4>{name}</h4>
         </a>
-        <>{`* ${stargazerCount}`}</>
-        <p>{`Language: ${primaryLanguage}`}</p>
+
+        <>{`⭐ ${stargazerCount}`}</>
+        <code>{`Language: ${primaryLanguage}`}</code>
         <p>{description}</p>
       </CardBody>
     </Card>

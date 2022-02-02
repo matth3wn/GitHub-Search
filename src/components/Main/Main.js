@@ -6,6 +6,14 @@ import Results from "../Results/Results";
 import Search from "../Search/Search";
 import Repo from "../Results/Repo/Repo";
 
+const MainContainer = styled.main`
+  display: flex;
+  justifiy-content: center;
+  aligin-items: center;
+  flex-direction: column;
+  padding: 20px;
+`
+
 const RepoContainer = styled.ul`
   display: flex;
   flex-wrap: wrap;
@@ -16,14 +24,13 @@ const RepoContainer = styled.ul`
 const Main = () => {
   const [state, dispatch] = useReducer(gitHubReducer, {
     term: "",
-    res: [],
     error: false,
     fullList: [],
     currentPage: 0,
   });
 
   return (
-    <main>
+    <MainContainer>
       <Search dispatch={dispatch} term={state.term} error={state.error} />
       {state.error ? <span>can i haz input plz</span> : null}
       {state.fullList.length ? (
@@ -54,7 +61,7 @@ const Main = () => {
           </RepoContainer>
         </Results>
       ) : null}
-    </main>
+    </MainContainer>
   );
 };
 

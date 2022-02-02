@@ -1,7 +1,7 @@
-import CONSTANTS from "./contants";
+import CONSTANTS from "./constants";
 import { GET_REPOS } from "./queries";
 
-export const makeApiCall = async ({ term, limit = 8, cursor = null }) => {
+export const makeApiCall = async ({ term, limit = 10, cursor = null }) => {
   try {
     const response = await fetch(CONSTANTS.githubUrl, {
       method: "POST",

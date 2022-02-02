@@ -1,5 +1,21 @@
 import React from "react";
 import { makeApiCall } from "../../utils/helpers";
+import styled from "@emotion/styled";
+
+const Input = styled.input`
+  height: 40px;
+`;
+
+const Button = styled.button`
+  background-color: #364036;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+`;
 
 const Search = ({ dispatch, term, error }) => {
   const handleSubmit = async (e) => {
@@ -20,8 +36,8 @@ const Search = ({ dispatch, term, error }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input placeholder="e.g. react" type="search" onChange={handleOnChange} />
-      <button type="submit">Search!</button>
+      <Input placeholder="e.g. react" type="search" onChange={handleOnChange} />
+      <Button type="submit">Search</Button>
     </form>
   );
 };
