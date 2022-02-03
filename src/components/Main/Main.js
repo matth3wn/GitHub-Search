@@ -27,17 +27,18 @@ const Main = () => {
     error: false,
     fullList: [],
     currentPage: 0,
+    loading: false
   });
 
   return (
     <MainContainer>
-      <Search dispatch={dispatch} term={state.term} error={state.error} />
+      <Search dispatch={dispatch} term={state.term} />
       {state.error ? <span>can i haz input plz</span> : null}
       {state.fullList.length ? (
         <Results dispatch={dispatch} state={state}>
           <Nav dispatch={dispatch} state={state} />
           <RepoContainer>
-            {state.fullList[state.currentPage - 1].repos.map((r, i) => {
+            {!state.loading ? state.fullList[state.currentPage - 1].repos.map((r, i) => {
               const {
                 name,
                 url,
@@ -57,7 +58,7 @@ const Main = () => {
                   stargazerCount={stargazerCount}
                 />
               );
-            })}
+            }) : <span>Loading...</span>}
           </RepoContainer>
         </Results>
       ) : null}

@@ -15,24 +15,26 @@ const NavButton = styled.button`
 
 const Nav = ({ dispatch, state }) => {
   const nextPage = async () => {
-    if (
-      state.fullList.length === 0 ||
-      state.fullList.length === state.currentPage
-    ) {
+    dispatch({ type: "LOADING", value: true });
+    if (state.fullList.length === state.currentPage) {
       const cursor =
         state.fullList.length < 1
           ? state.cursor
           : state.fullList[state.fullList.length - 1].cursor;
 
-      const { edges, endCursor } = await makeApiCall({
-        term: state.term,
-        cursor,
-      });
-      dispatch({
-        type: "NEXT_PAGE",
-        fullList: [...state.fullList, { repos: edges, cursor: endCursor }],
-        cursor: endCursor,
-      });
+      try {
+        const { edges, endCursor } = await makeApiCall({
+          term: state.term,
+          cursor,
+        });
+        dispatch({
+          type: "NEXT_PAGE",
+          fullList: [...state.fullList, { repos: edges, cursor: endCursor }],
+          cursor: endCursor,
+        });
+      } catch (error) {
+        dispatch({ type: "ERROR", value: true });
+      }
     } else {
       dispatch({
         type: "NEXT_PAGE",
@@ -44,14 +46,19 @@ const Nav = ({ dispatch, state }) => {
 
   const prevPage = () => {
     if (state.currentPage > 1) {
+      dispatch({ type: "LOADING", value: true });
       dispatch({ type: "PREV_PAGE" });
     }
   };
 
   return (
     <div>
-      <NavButton onClick={prevPage}>{"<"}</NavButton>
-      <NavButton onClick={nextPage}>{">"}</NavButton>
+      <NavButton name="prevBtn" onClick={prevPage}>
+        {"<"}
+      </NavButton>
+      <NavButton name="nextBtn" onClick={nextPage}>
+        {">"}
+      </NavButton>
     </div>
   );
 };
